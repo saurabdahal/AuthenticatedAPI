@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthentationWebAPI.Controllers
 {
-    [Authorize] 
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
@@ -16,6 +16,11 @@ namespace AuthentationWebAPI.Controllers
             _dbContext = dbContext;
         }
 
+        /* 
+         *The following code is for the Question
+         *Add a Get endpoint that returns all products.
+         *It returns all products saved in the database
+         */
         [HttpGet("/")]
         public ActionResult<IEnumerable<Product>> GetAllProducts()
         {
@@ -28,13 +33,17 @@ namespace AuthentationWebAPI.Controllers
 
             if (allProducts.Count == 0)
             {
-                return NotFound("No products found");
+                return NotFound("No products found in the database");
             }
 
             return Ok(allProducts);
         }
 
-
+        /* 
+         *The following code is for the Question
+         *Add a Get endpoint that takes a category Id and returns all products in that category. 
+         *It returns all products saved in the database
+         */
         [HttpGet("bycategory/{categoryId}")]
         public ActionResult<IEnumerable<Product>> GetProductsByCategoryId(int categoryId)
         {
@@ -51,20 +60,20 @@ namespace AuthentationWebAPI.Controllers
 
             if (productsInCategory.Count == 0)
             {
-                return NotFound("No products found in the specified category");
+                return NotFound("No products found in the category with id : "+categoryId);
             }
 
             return Ok(productsInCategory);
         }
 
-            /* 
-             * The code below is for the Question : 
-            Add a Post endpoint that takes a single product and adds it to the database.
-            It takes details for a single product and adds it to the database.
-            */
+        /* 
+         * The code below is for the Question : 
+        Add a Post endpoint that takes a single product and adds it to the database.
+        It takes details for a single product and adds it to the database.
+        */
 
 
-            [HttpPost("add")]
+        [HttpPost("add")]
         public ActionResult AddProduct([FromBody] Product productDto)
         {
             var category = _dbContext.Categories.FirstOrDefault(c => c.Description == productDto.ProductCategory.Description);
