@@ -1,18 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace AuthentationWebAPI.Data
 {
-    public class SecurityDbContext : DbContext
+    public class SecurityDbContext : IdentityDbContext<IdentityUser>
     {
-        public DbSet<User> Users { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public SecurityDbContext(DbContextOptions<SecurityDbContext> options)
+            : base(options)
         {
-            // Configure your database connection here
-            optionsBuilder.UseSqlServer("YourConnectionString"); // Replace with your actual database connection string
         }
     }
 }
+
