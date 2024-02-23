@@ -18,16 +18,31 @@ namespace AuthentationWebAPI.Controllers
             appDbContext = dbContext;
         }
 
+        [HttpGet("shopping-cart")]
+        public ActionResult<IEnumerable<Product>> GetProductsInShoppingCart()
+        {
+            var userId = User.FindFirst(ClaimTypes.Email)?.Value;
+            var shoppingCart = appDbContext.ShoppingCarts
+                .Include(sc => sc.Products)
+                .FirstOrDefault(sc => sc.User == userId);
+
+            if (shoppingCart == null)
+            {
+                return NotFound("Shopping cart not found");
+            }
+
+            return Ok(shoppingCart.Products);
+        }
+
         [HttpPost("shopping-cart/add/{productId}")]
         public ActionResult AddProductToShoppingCart(int productId)
         {
 
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
 
             var shoppingCart = appDbContext.ShoppingCarts
                 .Include(sc => sc.Products)
-                .FirstOrDefault(sc => sc.User == userId);
+                .FirstOrDefault(sc => sc.User == userEmail);
 
             if (shoppingCart == null)
             {
@@ -48,7 +63,6 @@ namespace AuthentationWebAPI.Controllers
 
             shoppingCart.Products.Add(productToAdd);
             appDbContext.SaveChanges();
-
 
 
             return Ok("Product " + productToAdd.Name + " added successfully to your shopping cart.\n Your shopping cart now has "+GetProductsInShoppingCart(shoppingCart.Id)+" items.");
