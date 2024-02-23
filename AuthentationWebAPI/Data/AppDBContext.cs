@@ -9,9 +9,21 @@ namespace AuthentationWebAPI.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
+        
         public AppDbContext(DbContextOptions<AppDbContext> options)
                     : base(options)
         {
         }
+        
+        /*
+        public AppDbContext() { }
+
+        // referecen for database migration
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) => Database.Migrate();
+
+        //database configuration
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder.UseSqlite();
+        */
     }
 }

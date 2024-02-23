@@ -3,7 +3,7 @@
     public class ShoppingCart
     {
         public int Id { get; set; }
-        public string User { get; set; }
-        public List<Product> Products { get; set; }
+        public required string User { get; set; }
+        public required List<Product> Products { get; set; }
     }
 }

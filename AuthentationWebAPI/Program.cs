@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
+builder.Services.AddDbContext<SecurityDbContext>(options => options.UseInMemoryDatabase("appDB"));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("securityDB"));
 
-builder.Services.AddDbContext<SecurityDbContext>(options => options.UseInMemoryDatabase("me"));
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("you"));
+//builder.Services.AddDbContext<SecurityDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+//builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("SecurityConnection")));
 
 
 builder.Services.AddAuthorization();
