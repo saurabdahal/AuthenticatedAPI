@@ -9,11 +9,11 @@ namespace AuthentationWebAPI.Controllers
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
-        private readonly AppDbContext _dbContext;
+        private readonly AppDbContext appDbContext;
 
         public ProductController(AppDbContext dbContext)
         {
-            _dbContext = dbContext;
+            appDbContext = dbContext;
         }
 
         /* 
@@ -24,11 +24,12 @@ namespace AuthentationWebAPI.Controllers
         [HttpGet("/")]
         public ActionResult<IEnumerable<Product>> GetAllProducts()
         {
-            var allProducts = _dbContext.Products.Select(p => new
+            var allProducts = appDbContext.Products.Select(p => new
             {
                 Name = p.Name,
                 Price = p.Price,
-                Description = p.Description
+                Description = p.Description,
+                Category = p.ProductCategory
             }).ToList();
 
             if (allProducts.Count == 0)
@@ -47,13 +48,14 @@ namespace AuthentationWebAPI.Controllers
         [HttpGet("bycategory/{categoryId}")]
         public ActionResult<IEnumerable<Product>> GetProductsByCategoryId(int categoryId)
         {
-            var productsInCategory = _dbContext.Products
+            var productsInCategory = appDbContext.Products
                 .Where(p => p.ProductCategory.Id == categoryId)
                 .Select(p => new
                 {
                     Name = p.Name,
                     Price = p.Price,
-                    Description = p.Description
+                    Description = p.Description,
+                    Category = p.ProductCategory
                 })
                 .ToList();
 
@@ -76,12 +78,12 @@ namespace AuthentationWebAPI.Controllers
         [HttpPost("add")]
         public ActionResult AddProduct([FromBody] Product productDto)
         {
-            var category = _dbContext.Categories.FirstOrDefault(c => c.Description == productDto.ProductCategory.Description);
+            var category = appDbContext.Categories.FirstOrDefault(c => c.Description == productDto.ProductCategory.Description);
 
             if (category == null)
             {
                 category = new Category { Description = productDto.ProductCategory.Description };
-                _dbContext.Categories.Add(category);
+                appDbContext.Categories.Add(category);
             }
 
             var productToAdd = new Product
@@ -91,9 +93,9 @@ namespace AuthentationWebAPI.Controllers
                 Description = productDto.Description,
                 ProductCategory = category,
             };
-
-            _dbContext.Products.Add(productToAdd);
-            _dbContext.SaveChanges();
+            Console.WriteLine(productToAdd);
+            appDbContext.Products.Add(productToAdd);
+            appDbContext.SaveChanges();
 
             return Ok(productToAdd.Name + " added successfully");
         }
