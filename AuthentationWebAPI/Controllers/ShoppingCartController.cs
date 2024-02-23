@@ -34,6 +34,31 @@ namespace AuthentationWebAPI.Controllers
             return Ok(shoppingCart.Products);
         }
 
+        [HttpPost("shopping-cart/remove/{productId}")]
+        public ActionResult RemoveProductFromShoppingCart(int productId)
+        {
+            var email = User.FindFirst(ClaimTypes.Email)?.Value;
+            var shoppingCart = appDbContext.ShoppingCarts
+                .Include(sc => sc.Products)
+                .FirstOrDefault(sc => sc.User == email);
+
+            if (shoppingCart == null)
+            {
+                return NotFound("Shopping cart not found");
+            }
+
+            var productToRemove = shoppingCart.Products.FirstOrDefault(p => p.Id == productId);
+
+            if (productToRemove == null)
+            {
+                return NotFound("Product not found in the shopping cart");
+            }
+            shoppingCart.Products.Remove(productToRemove);
+            appDbContext.SaveChanges();
+
+            return Ok("item removed");
+        }
+
         [HttpPost("shopping-cart/add/{productId}")]
         public ActionResult AddProductToShoppingCart(int productId)
         {
