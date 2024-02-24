@@ -1,4 +1,5 @@
 ﻿using AuthentationWebAPI.Data;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,6 @@ namespace AuthentationWebAPI.Controllers
          *Add a Get endpoint that returns all products in the user's shopping cart. 
          *It returns all products currently in the user's shopping cart
          */
-
         [HttpGet("shoppingcart")]
         public ActionResult<IEnumerable<Product>> GetProductsInShoppingCart()
         {
@@ -46,7 +46,6 @@ namespace AuthentationWebAPI.Controllers
          *Add a Post endpoint that takes a single ID and removes the item from the shopping cart.
          *It takes product id and removes the item from the shopping cart
         */
-
         [HttpPost("shoppingcart/remove-product/{productId}")]
         public ActionResult RemoveProductFromShoppingCart(int productId)
         {
@@ -79,7 +78,6 @@ namespace AuthentationWebAPI.Controllers
          *Add a Post endpoint that takes a single ID and adds the item to the shopping cart. Make sure to create the Shopping Cart if needed and Assign the Current Users Email to the User property.
          *It takes product id and attempts to add the item to the shopping cart, if the shopping is not created yet, it creates the shopping cart and adds the product
         */
-
         [HttpPost("shoppingcart/add-product/{productId}")]
         public ActionResult AddProductToShoppingCart(int productId)
         {
@@ -113,7 +111,6 @@ namespace AuthentationWebAPI.Controllers
 
             return Ok("Product " + productToAdd.Name + " added successfully to your shopping cart.\n Your shopping cart now has " + GetProductsInShoppingCart(shoppingCart.Id) + " items.");
         }
-
         /*
          * The purpose of this method is to get the number of products in your shopping cart
          */

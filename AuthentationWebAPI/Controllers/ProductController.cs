@@ -73,8 +73,6 @@ namespace AuthentationWebAPI.Controllers
         Add a Post endpoint that takes a single product and adds it to the database.
         It takes details for a single product and adds it to the database.
         */
-
-
         [HttpPost("add")]
         public ActionResult AddProduct([FromBody] Product productDto)
         {
