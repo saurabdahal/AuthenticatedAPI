@@ -1,7 +1,7 @@
 namespace AuthenticationAPITestProject
 {
     [TestClass]
-    public class UnitTest1
+    public class AuthenticatedAPITestCaseForShoppingCart
     {
         [TestMethod]
         public void TestMethod1()

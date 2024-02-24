@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AuthentationWebAPI\AuthentationWebAPI.csproj" />
     <ProjectReference Include="..\AuthenticationAPIClassLibrary\AuthenticationAPIClassLibrary.csproj" />
   </ItemGroup>
 
