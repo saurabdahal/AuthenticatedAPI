@@ -34,7 +34,7 @@ namespace AuthentationWebAPI.Controllers
 
             if (shoppingCart == null)
             {
-                return NotFound("Shopping cart not found");
+                return NotFound("Shopping cart has not been created yet");
             }
 
             return Ok(shoppingCart.Products);
@@ -52,7 +52,7 @@ namespace AuthentationWebAPI.Controllers
             var email = User.FindFirst(ClaimTypes.Email)?.Value;  // currently authenticated user
             var shoppingCart = appDbContext.ShoppingCarts
                 .Include(sc => sc.Products)
-                .FirstOrDefault(sc => sc.User == email);
+                .FirstOrDefault(sc => sc.User == email);          // cart is bound to the user
 
             var initialCount = shoppingCart?.Products?.Count ?? 0;
 
@@ -65,7 +65,7 @@ namespace AuthentationWebAPI.Controllers
 
             if (productToRemove == null)
             {
-                return NotFound("Product not found in the shopping cart");
+                return NotFound("Product with Id "+productId+" not found in the shopping cart");
             }
             shoppingCart.Products.Remove(productToRemove);
             appDbContext.SaveChanges();

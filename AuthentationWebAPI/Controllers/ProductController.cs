@@ -34,7 +34,7 @@ namespace AuthentationWebAPI.Controllers
 
             if (allProducts.Count == 0)
             {
-                return NotFound("No products found in the database");
+                return NotFound("No products were found in the database");
             }
 
             return Ok(allProducts);

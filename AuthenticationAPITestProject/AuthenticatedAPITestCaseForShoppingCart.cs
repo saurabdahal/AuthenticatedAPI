@@ -17,12 +17,12 @@ namespace AuthenticationAPITestProject
             var shoppingCart = new ShoppingCart
             {
                 Id = 1,
-                User = "testUser",
+                User = "Me",
                 Products = products
             };
 
             Assert.AreEqual(1, shoppingCart.Id);
-            Assert.AreEqual("testUser", shoppingCart.User);
+            Assert.AreEqual("Me", shoppingCart.User);
             CollectionAssert.AreEqual(products, shoppingCart.Products);
         }
 
@@ -37,7 +37,7 @@ namespace AuthenticationAPITestProject
             };
 
 
-            Assert.IsNotNull(shoppingCart.User, "ShoppingCart User should not be null");
+            Assert.IsNotNull(shoppingCart.User, "User should not be null");  // results in fail test scenerio
         }
 
         [TestMethod]
@@ -50,7 +50,7 @@ namespace AuthenticationAPITestProject
                 Products = null
             };
 
-            Assert.IsNotNull(shoppingCart.Products, "ShoppingCart Products should not be null");
+            Assert.IsNotNull(shoppingCart.Products, "Products should not be null");  // results in fail test scenerio
         }
 
         [TestMethod]

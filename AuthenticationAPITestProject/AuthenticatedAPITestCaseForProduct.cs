@@ -9,7 +9,7 @@ namespace AuthenticationAPITestProject
     {
 
         [TestMethod]
-        public void ProductModel_ShouldSetPropertiesCorrectly()
+        public void Product_ShouldSetPropertiesCorrectly()
         {
             var product = new Product
             {
@@ -31,39 +31,39 @@ namespace AuthenticationAPITestProject
         }
 
         [TestMethod]
-        public void ProductModel_IdShouldBeAnInteger()
+        public void Product_IdShouldBeAnInteger()
         {
             var product = new Product
             {
                 Id = 1,
-                Name = "TestProduct",
+                Name = "Barbell",
                 Price = 10.0m,
-                Description = "TestDescription",
-                ProductCategory = new Category { Id = 1, Description = "TestCategory" }
+                Description = "Barbell is awesome",
+                ProductCategory = new Category { Id = 1, Description = "Gym item" }
             };
 
-            Assert.IsInstanceOfType(product.Id, typeof(int), "Product Id should be an instance of int"); 
+            Assert.IsInstanceOfType(product.Id, typeof(int), "Id should be an instance of int"); 
 
         }
 
         [TestMethod]
-        public void ProductModel_PiceShouldBeAnDecimal()
+        public void Product_PiceShouldBeAnDecimal()
         {
             var product = new Product
             {
                 Id = 1,
-                Name = "TestProduct",
+                Name = "Banana",
                 Price = 10.0m,
-                Description = "TestDescription",
-                ProductCategory = new Category { Id = 1, Description = "TestCategory" }
+                Description = "Fruit",
+                ProductCategory = new Category { Id = 1, Description = "Fruit is good" }
             };
 
-            Assert.IsInstanceOfType(product.Price, typeof(decimal), "Product Price should be an instance of decimal");
+            Assert.IsInstanceOfType(product.Price, typeof(decimal), "Price should be an instance of decimal");
 
         }
 
         [TestMethod]
-        public void ProductModel_ProductCategoryShouldBeInstanceOfCategory()
+        public void Product_ProductCategoryShouldBeInstanceOfCategory()
         {
             var product = new Product
             {

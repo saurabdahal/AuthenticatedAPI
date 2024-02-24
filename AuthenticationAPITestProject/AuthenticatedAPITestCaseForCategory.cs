@@ -7,7 +7,7 @@ namespace AuthenticationAPITestProject
     {
 
         [TestMethod]
-        public void CategoryModel_ShouldSetPropertiesCorrectly()
+        public void Category_ShouldSetPropertiesCorrectly()
         {
             var category = new Category
             {
@@ -20,31 +20,31 @@ namespace AuthenticationAPITestProject
         }
 
         [TestMethod]
-        public void CategoryModel_IdShouldBeAnInteger()
+        public void Category_IdShouldBeAnInteger()
         {
             var category = new Category
             {
                 Id = 1,
-                Description = "TestCategory"
+                Description = "Veggies"
             };
 
-            Assert.IsInstanceOfType(category.Id, typeof(int), "Category Id should be an instance of int");
+            Assert.IsInstanceOfType(category.Id, typeof(int), "Id should be an instance of int");
         }
 
         [TestMethod]
-        public void CategoryModel_DescriptionShouldBeAString()
+        public void Category_DescriptionShouldBeAString()
         {
             var category = new Category
             {
                 Id = 1,
-                Description = "TestCategory"
+                Description = "Lorem Ipsum is overrated"
             };
 
-            Assert.IsInstanceOfType(category.Description, typeof(string), "Category Description should be an instance of string");
+            Assert.IsInstanceOfType(category.Description, typeof(string), "Description should be an instance of string");
         }
 
         [TestMethod]
-        public void CategoryModel_DescriptionShouldNotBeNull()
+        public void Category_DescriptionShouldNotBeNull()
         {
             // Arrange
             var category = new Category
@@ -53,7 +53,7 @@ namespace AuthenticationAPITestProject
                 Description = null
             };
 
-            Assert.IsNotNull(category.Description, "Category Description should not be null");
+            Assert.IsNotNull(category.Description, "Description should not be null");  // this will generate a fail test scenerio 
         }
     }
 
