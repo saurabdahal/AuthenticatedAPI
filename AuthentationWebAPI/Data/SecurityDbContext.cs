@@ -12,17 +12,6 @@ namespace AuthentationWebAPI.Data
         {
         }
         
-
-        /*
-        public SecurityDbContext() { }
-
-        // referecen for database migration
-        public SecurityDbContext(DbContextOptions<SecurityDbContext> options) : base(options) => Database.Migrate();
-
-        //database configuration
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlite();
-        */
     }
 }
 
